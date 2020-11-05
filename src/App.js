@@ -1,25 +1,54 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
+import { Switch, Route, withRouter, useHistory } from 'react-router-dom'
+
 import './App.css';
 
-function App() {
+import axios from 'axios'
+
+import {API_URL} from './config'
+
+import SILNavBar from './components/silnavbar/SILNavBar'
+import SignUp from './components/signup/SignUp'
+
+const App = () => {
+
+  const [loggedInClimber, setLoggedInClimber] = useState(null)
+
+  const history = useHistory();
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+
+    const { username, email, password } = event.target
+
+    axios.post(`${API_URL}/signup`, {
+      username: username.value,
+      email: email.value,
+      password: password.value
+    }, {withCredentials: true})
+      .then((response) => {
+        setLoggedInClimber(response.data)
+        history.push('/')
+      })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Hello!
+      <SILNavBar />
+
+      <Switch>
+
+        <Route path="/sign-up" render={ (routeProps) => {
+          return <SignUp onSignUp={handleSignUp} {...routeProps} />
+        } }/>
+
+        <Route path="/sign-in"/>
+
+      </Switch>
+
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
