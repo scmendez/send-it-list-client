@@ -1,20 +1,20 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const SILNavBar = () => {
+const SILNavBar = (props) => {
     return (
         <Navbar bg="light" expand="lg">
-                <Link to="/sign-up">Sign-Up</Link>
-
-
-
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    
-                    <Link to="/sign-in">Sign-In</Link>
-                </Nav>
-            </Navbar.Collapse>
+            {
+                props.loggedInClimber ? (
+                    <button onClick={props.onLogout}>Logout</button>
+                ) : (
+                    <React.Fragment>
+                        <Link to="/sign-in">Sign In</Link>
+                        <Link to="/sign-up">Sign Up</Link>
+                    </React.Fragment>                            
+                )
+            }
 
         </Navbar>
     )
