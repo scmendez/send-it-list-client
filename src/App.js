@@ -19,6 +19,8 @@ const App = () => {
   const [loggedInClimber, setLoggedInClimber] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [myProjects, setMyProjects] = useState([])
+  const [searchedRoutesResults, setSearchedRoutesResults] = useState(null)
+  const [searchedCity, setSearchedCity] = useState(null)
 
   const history = useHistory();
 
@@ -88,9 +90,21 @@ const App = () => {
 
     axios.get(`${API_URL}/mapSearch/${location.value}/${routeType.value}`, { withCredentials: true })
       .then((response) => {
-
+        console.log(response)
+        setSearchedRoutesResults(response.data.routesResponse.routes)
+        setSearchedCity(response.data.cityLatLon)
       })
 
+      let filteredByTypeList = null
+
+      {
+        searchedRoutesResults ? (filteredByTypeList = searchedRoutesResults.filter((route) => {
+            return route.type === routeType.value
+            }) 
+          ) : (filteredByTypeList = null)
+      }
+
+    setSearchedRoutesResults(filteredByTypeList)
 
   }
 
@@ -126,7 +140,7 @@ const App = () => {
         } }/>
 
         <Route path="/search-routes" render={ (routeProps) => {
-          return <SearchRoutes {...routeProps} onRouteSearch={handleRouteSearch}/>
+          return <SearchRoutes {...routeProps} onRouteSearch={handleRouteSearch} searchedRoutesResults={searchedRoutesResults} searchedCity={searchedCity}/>
         } }/>
 
       </Switch>
