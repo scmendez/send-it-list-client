@@ -19,7 +19,7 @@ const App = () => {
   const [loggedInClimber, setLoggedInClimber] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const [myProjects, setMyProjects] = useState([])
-  const [searchedRoutesResults, setSearchedRoutesResults] = useState(null)
+  const [searchedRoutesResults, setSearchedRoutesResults] = useState([])
   const [searchedCity, setSearchedCity] = useState(null)
 
   const history = useHistory();
@@ -85,24 +85,29 @@ const App = () => {
     event.preventDefault();
 
     const { location, routeType } = event.target
+    console.log(routeType.value)
 
-    axios.get(`${API_URL}/mapSearch/${location.value}/${routeType.value}`, { withCredentials: true })
+    axios.get(`${API_URL}/mapSearch/${location.value}`, { withCredentials: true })
       .then((response) => {
-        console.log(response)
-        setSearchedRoutesResults(response.data.routesResponse.routes)
-        setSearchedCity(response.data.cityLatLon)
-      })
-
-      let filteredByTypeList
-
-      {
-        searchedRoutesResults ? (filteredByTypeList = searchedRoutesResults.filter((route) => {
+        let searchResults = response.data.routesResponse.routes
+        setSearchedRoutesResults(searchResults.filter((route) => {
             return route.type === routeType.value
-            }) 
-          ) : (filteredByTypeList = null)
-      }
+            }))
+        setSearchedCity(response.data.cityLatLon)
+        console.log('within function', searchedRoutesResults)
+      })
+  }
 
-    setSearchedRoutesResults(filteredByTypeList)
+  const handleAddRoute = (routeId) => {
+
+    axios.get(`${API_URL}/add-climbing-route/${routeId}`, { withCredentials: true })
+      .then((response) => {
+        setMyProjects(...myProjects, response)
+      })
+  }
+
+  const handleUnmount = () => {
+    setSearchedRoutesResults(null)
 
   }
 
@@ -126,19 +131,25 @@ const App = () => {
         } }/>
 
         <Route path="/current-projects" render={ (routeProps) => {
-          return <ProjectList {...routeProps} />
+          return <ProjectList {...routeProps} myProjects={myProjects.filter((route) => {
+            return route.listType === 'current'
+            })} />
         } }/>
 
         <Route path="/future-projects" render={ (routeProps) => {
-          return <ProjectList {...routeProps} myProjects={myProjects}/>
+          return <ProjectList {...routeProps} myProjects={myProjects.filter((route) => {
+            return route.listType === 'future'
+            })} />
         } }/>
 
         <Route path="/sent-projects" render={ (routeProps) => {
-          return <ProjectList {...routeProps} />
+          return <ProjectList {...routeProps} myProjects={myProjects.filter((route) => {
+            return route.listType === 'sent'
+            })} />
         } }/>
 
         <Route path="/search-routes" render={ (routeProps) => {
-          return <SearchRoutes {...routeProps} onRouteSearch={handleRouteSearch} searchedRoutesResults={searchedRoutesResults} searchedCity={searchedCity}/>
+          return <SearchRoutes {...routeProps} onRouteSearch={handleRouteSearch} onAddRoute={handleAddRoute} searchedRoutesResults={searchedRoutesResults} searchedCity={searchedCity} onUnmount={handleUnmount}/>
         } }/>
 
       </Switch>

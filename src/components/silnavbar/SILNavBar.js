@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 const SILNavBar = (props) => {
     return (
         <Navbar bg="light" expand="lg">
+            <Link to="/home">Home</Link>
             {
                 props.loggedInClimber ? (
                     <button onClick={props.onLogout}>Logout</button>
