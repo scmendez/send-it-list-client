@@ -37,8 +37,6 @@ const App = () => {
       .then((response) => {
         setMyProjects(response.data)
       })
-
-
   }, [])
 
   const handleSignUp = (event) => {
@@ -95,7 +93,7 @@ const App = () => {
         setSearchedCity(response.data.cityLatLon)
       })
 
-      let filteredByTypeList = null
+      let filteredByTypeList
 
       {
         searchedRoutesResults ? (filteredByTypeList = searchedRoutesResults.filter((route) => {
