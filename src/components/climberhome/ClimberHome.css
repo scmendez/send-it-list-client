@@ -1,0 +1,21 @@
+body {
+    background: #4DB6AC;
+}
+
+Button {
+    padding: 20px;
+    margin: 20px 10px;
+    border-radius: 5px;
+}
+
+.proj-links {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #EF6C00;
+}
+
+.search-link {
+    text-decoration: none;
+    text-transform: uppercase;
+}

@@ -1,0 +1,11 @@
+.all-cards {
+    display: flex;
+    justify-content: center;
+}
+
+.route-card {
+    border: 2px #fff solid;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}

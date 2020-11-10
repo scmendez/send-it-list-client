@@ -1,21 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Container, Image, Button } from 'react-bootstrap'
+
+import './ClimberHome.css'
 
 const ClimberHome = (props) => {
     return(
         <div>
-            <img src="/images/profilePic.png" alt="temp profile pic"></img>
+        <Container fluid>
+            <Image src="/images/profilePic.png" alt="temp profile pic" roundedCircle />
             {
-                props.loggedInClimber ? ( <h1>{props.loggedInClimber.username}</h1> ) : null
+                props.loggedInClimber ? ( <h2>Hello, {props.loggedInClimber.username}!</h2> ) : null
             }
-            <Link to="/current-projects">Projects</Link>
+            <Button size="lg" variant="light"><Link to="/current-projects" className="proj-links">Projects</Link></Button>
             <br />
-            <Link to="/future-projects">Want to climb</Link>
+            <Button size="lg" variant="light"><Link to="/future-projects" className="proj-links">Want to climb</Link></Button>
             <br />
-            <Link to="/sent-projects">Have climbed</Link>
+            <Button size="lg" variant="light"><Link to="/sent-projects" className="proj-links">Have climbed</Link></Button>
             <br />
-            <Link to="/search-routes">Search routes</Link>
-            
+            <Button size="lg" variant="light"><Link to="/search-routes" className="search-link">Search routes</Link></Button>
+        </Container>    
         </div>
     )
 }

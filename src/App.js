@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route, withRouter, useHistory } from 'react-router-dom'
 
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css'
 
 import axios from 'axios'
 
@@ -13,6 +14,8 @@ import SignIn from './components/signin/SignIn'
 import ClimberHome from './components/climberhome/ClimberHome'
 import ProjectList from './components/projectlist/ProjectList'
 import SearchRoutes from './components/searchroutes/SearchRoutes'
+import RouteDetails from './components/routedetails/RouteDetails'
+import EditRoute from './components/editroute/EditRoute'
 
 const App = () => {
 
@@ -103,6 +106,7 @@ const App = () => {
     axios.get(`${API_URL}/add-climbing-route/${routeId}`, { withCredentials: true })
       .then((response) => {
         setMyProjects(...myProjects, response)
+        history.push('/home')
       })
   }
 
@@ -111,9 +115,47 @@ const App = () => {
 
   }
 
+  const handleDelete = (routeDbId) => {
+    axios.delete(`${API_URL}/delete/${routeDbId}`, { withCredentials: true })
+      .then(() => {
+
+        let filteredProjects = myProjects.filter((eachRoute) => {
+              return eachRoute._id !== routeDbId
+          })
+
+        setMyProjects(filteredProjects)
+        history.push('/home')
+      })
+  }
+
+  const handleEdit = (event, route) => {
+    event.preventDefault();
+    console.log('routeDbId', route._id)
+
+    const { personalNotes, dateAccomplished, listType } = event.target
+    
+    //console.log('handle edit')
+    axios.patch(`${API_URL}/edit/${route._id}`, {
+      personalNotes: personalNotes.value,
+      dateAccomplished: dateAccomplished.value,
+      listType: listType.value
+    }, { withCredentials: true })
+      .then(() => {
+        let updatedRoute = myProjects.map((eachRoute) => {
+          if (eachRoute._id == route._id) {
+            eachRoute = route
+          }
+          return eachRoute
+        })
+
+        setMyProjects(updatedRoute)
+        history.push('/home')
+    })
+  }
+
   return (
     <div className="App">
-      Hello!
+      <h1>Send-It List</h1>
       <SILNavBar onLogout={handleLogOut} loggedInClimber={loggedInClimber}/>
 
       <Switch>
@@ -131,19 +173,19 @@ const App = () => {
         } }/>
 
         <Route path="/current-projects" render={ (routeProps) => {
-          return <ProjectList {...routeProps} myProjects={myProjects.filter((route) => {
+          return <ProjectList {...routeProps} onDelete={handleDelete} myProjects={myProjects.filter((route) => {
             return route.listType === 'current'
             })} />
         } }/>
 
         <Route path="/future-projects" render={ (routeProps) => {
-          return <ProjectList {...routeProps} myProjects={myProjects.filter((route) => {
+          return <ProjectList {...routeProps} onDelete={handleDelete} myProjects={myProjects.filter((route) => {
             return route.listType === 'future'
             })} />
         } }/>
 
         <Route path="/sent-projects" render={ (routeProps) => {
-          return <ProjectList {...routeProps} myProjects={myProjects.filter((route) => {
+          return <ProjectList {...routeProps} onDelete={handleDelete} myProjects={myProjects.filter((route) => {
             return route.listType === 'sent'
             })} />
         } }/>
@@ -151,6 +193,14 @@ const App = () => {
         <Route path="/search-routes" render={ (routeProps) => {
           return <SearchRoutes {...routeProps} onRouteSearch={handleRouteSearch} onAddRoute={handleAddRoute} searchedRoutesResults={searchedRoutesResults} searchedCity={searchedCity} onUnmount={handleUnmount}/>
         } }/>
+
+        <Route path="/details/:routeDbId" render={ (routeProps) => {
+          return <RouteDetails {...routeProps} onDelete={handleDelete} />
+        } }></Route>
+
+        <Route path="/edit/:routeDbId" render={ (routeProps) => {
+          return <EditRoute {...routeProps} onEdit={handleEdit} />
+        } }></Route>
 
       </Switch>
 
