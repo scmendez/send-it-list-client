@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet';
 
 const SearchRoutes = (props) => {
     
-    const position = props.searchedCity ? Object.values(props.searchedCity) : [51.505,-0.09]
+    const position = props.searchedCity ? Object.values(props.searchedCity) : [34.0522, -118.2437]
 
     useEffect(() => {
         //for leaflet marker
@@ -50,11 +51,13 @@ const SearchRoutes = (props) => {
                                 return  (
                                     <Marker icon={customMarker} position={positionMarker} key={route.id}>
                                         <Popup>
-                                            Name: {route.name}
+                                            <b>Name: </b>{route.name}
                                             <br />
-                                            Type: {route.type}
+                                            <b>Type: </b>{route.type}
                                             <br />
-                                            Rating: {route.rating}
+                                            <b>Rating: </b>{route.rating}
+                                            <br />
+                                            <a href={route.url} target="_blank">More details on MountainProject</a>
                                             <br />
                                             <button onClick={ () => {props.onAddRoute(route.id)} }>Add route</button>
                                         </Popup>

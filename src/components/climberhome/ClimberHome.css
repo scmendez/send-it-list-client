@@ -8,6 +8,11 @@ Button {
     border-radius: 5px;
 }
 
+.profile-photo {
+    width: 200px;
+    height: 200px;
+}
+
 .proj-links {
     text-decoration: none;
     text-transform: uppercase;

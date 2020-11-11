@@ -9,18 +9,18 @@ const ProjectList = (props) => {
     //console.log(myProjects)
 
     return (
-        <React.Fragment className="all-cards">
+        <React.Fragment>
             {
                 myProjects.map((route) => {
                     return (
                         <Container key={route._id} className="route-card">
-                            <Card fluid>
+                            <Card fluid="true">
                                     <Card.Title>{route.routeName}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">{route.routeType}</Card.Subtitle>
                                     <Card.Text>
-                                    Personal Notes: {route.personalNotes}
+                                        Personal Notes: { route.personalNotes ? (<p>{route.personalNotes}</p>) : (<p>No notes yet!</p>) }
                                     </Card.Text>
-                                    <Card.Link><Link to={`/details/${route._id}`}>More info</Link></Card.Link>
+                                    <Link to={`/details/${route._id}`}>More info</Link>
                             </Card>
                         </Container>
                     )

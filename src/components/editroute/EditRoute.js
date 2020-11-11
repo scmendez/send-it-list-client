@@ -27,7 +27,7 @@ const EditRoute = (props) => {
     const { routeName, routeType, routeRating, routePitches, routeLocation, personalNotes, dateAccomplished, listType } = route
 
     return (
-        <form onSubmit={ (event) => {props.onEdit(event, route)}}>
+        <form onSubmit={ (event) => {props.onRouteEdit(event, route)}}>
             Route Name: {routeName}
             <br />
             Route Type: {routeType}

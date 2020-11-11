@@ -1,6 +1,12 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 
 const SignUp = (props) => {
+
+    if (props.loggedInClimber) {
+        return <Redirect to={'/home'} />
+    }
+    
     return (
         <form onSubmit={props.onSignUp}>
             <div className="form-group">

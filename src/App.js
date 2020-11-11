@@ -12,6 +12,7 @@ import SILNavBar from './components/silnavbar/SILNavBar'
 import SignUp from './components/signup/SignUp'
 import SignIn from './components/signin/SignIn'
 import ClimberHome from './components/climberhome/ClimberHome'
+import EditProfile from './components/editprofile/EditProfile'
 import ProjectList from './components/projectlist/ProjectList'
 import SearchRoutes from './components/searchroutes/SearchRoutes'
 import RouteDetails from './components/routedetails/RouteDetails'
@@ -84,6 +85,23 @@ const App = () => {
       })
   }
 
+  const handleUsernameEdit = (event, climber) => {
+    event.preventDefault();
+
+    const { username } = event.target
+    
+    //console.log('handle edit')
+    axios.patch(`${API_URL}/editUsername/${climber._id}`, {username: username.value}, { withCredentials: true })
+      .then((updatedClimber) => {
+          setLoggedInClimber(updatedClimber)
+          history.push('/home')          
+      })
+  }
+
+  const handleProfilePhotoEdit = (event, climber) => {
+    console.log('profile photo edit')
+  }
+
   const handleRouteSearch = (event) => {
     event.preventDefault();
 
@@ -128,7 +146,7 @@ const App = () => {
       })
   }
 
-  const handleEdit = (event, route) => {
+  const handleRouteEdit = (event, route) => {
     event.preventDefault();
     console.log('routeDbId', route._id)
 
@@ -161,7 +179,7 @@ const App = () => {
       <Switch>
 
         <Route path="/sign-up" render={ (routeProps) => {
-          return <SignUp onSignUp={handleSignUp} {...routeProps} />
+          return <SignUp onSignUp={handleSignUp} {...routeProps} loggedInClimber={loggedInClimber} />
         } }/>
 
         <Route path="/sign-in" render={ (routeProps) => {
@@ -171,6 +189,10 @@ const App = () => {
         <Route path="/home" render={ () => {
           return <ClimberHome loggedInClimber={loggedInClimber} />
         } }/>
+
+        <Route path="/edit-profile" render={ (routeProps) => {
+          return <EditProfile {...routeProps} loggedInClimber={loggedInClimber} onUsernameEdit={handleUsernameEdit} onProfilePhotoEdit={handleProfilePhotoEdit}/>
+        } } />
 
         <Route path="/current-projects" render={ (routeProps) => {
           return <ProjectList {...routeProps} onDelete={handleDelete} myProjects={myProjects.filter((route) => {
@@ -199,7 +221,7 @@ const App = () => {
         } }></Route>
 
         <Route path="/edit/:routeDbId" render={ (routeProps) => {
-          return <EditRoute {...routeProps} onEdit={handleEdit} />
+          return <EditRoute {...routeProps} onRouteEdit={handleRouteEdit} />
         } }></Route>
 
       </Switch>
