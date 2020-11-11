@@ -93,8 +93,8 @@ const App = () => {
     //console.log('handle edit')
     axios.patch(`${API_URL}/editUsername/${climber._id}`, {username: username.value}, { withCredentials: true })
       .then((updatedClimber) => {
-          setLoggedInClimber(updatedClimber)
-          history.push('/home')          
+          setLoggedInClimber(updatedClimber)  
+          history.push('/home')      
       })
   }
 

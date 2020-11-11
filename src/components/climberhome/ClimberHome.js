@@ -8,14 +8,21 @@ import './ClimberHome.css'
 
 const ClimberHome = (props) => {
 
-  const [loggedInClimberHome, setLoggedInClimberHome] = useState({})
+  const [loggedInClimber, setLoggedInClimber] = useState({})
+  console.log('propsloggedinclimber', props.loggedInClimber)
+
 
   useEffect(() => {
-    axios.get(`${API_URL}/climber`, { withCredentials: true })
-    .then((response) => {
-        //console.log(response.data)
-        setLoggedInClimberHome(response.data)
-    })
+
+    let climberId = props.loggedInClimber ? (props.loggedInClimber._id) : null
+
+    if (climberId) {
+        axios.get(`${API_URL}/climberInfo/${climberId}`, { withCredentials: true })
+        .then((response) => {
+            console.log('axios climber esponse', response.data)
+            setLoggedInClimber(response.data)
+        })
+    }
   }, [])
 
     if (!props.loggedInClimber) {
@@ -27,7 +34,7 @@ const ClimberHome = (props) => {
             <Container fluid>
                 <Image className="profile-photo" src="/images/defaultProfilePhoto.png" alt="profile pic" roundedCircle />
                 {
-                    props.loggedInClimber ? ( <h2>Hello, {props.loggedInClimber.username}!</h2> ) : null
+                    props.loggedInClimber ? ( <h2>Hello, {loggedInClimber.username}!</h2> ) : null
                 }
                 <Button size="lg" variant="light"><Link to="/current-projects" className="proj-links">Current Projects</Link></Button>
                 <br />

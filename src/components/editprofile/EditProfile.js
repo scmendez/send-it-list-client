@@ -5,14 +5,18 @@ import {API_URL} from '../../config'
 
 const EditProfile = (props) => {
 
-    const [loggedInClimber, setLoggedInClimber] = useState({})
+    const [loggedInClimber, setLoggedInClimber] = useState(props.loggedInClimber)
 
     useEffect(() => {
-        axios.get(`${API_URL}/climber`, { withCredentials: true })
-            .then((response) => {
-                console.log('routedbid response', response)
-                setLoggedInClimber(response.data)
-        })
+        let climberId = props.loggedInClimber ? (props.loggedInClimber._id) : null
+
+        if (climberId) {
+            axios.get(`${API_URL}/climberInfo/${climberId}`, { withCredentials: true })
+                .then((response) => {
+                    console.log('axios climber esponse', response.data)
+                    setLoggedInClimber(response.data)
+            })
+        }
     }, [])
 
     const handleNameChange = (event) => {
@@ -21,6 +25,10 @@ const EditProfile = (props) => {
         setLoggedInClimber(cloneProfile)
     }
 
+    if (!loggedInClimber) {
+        return null
+    }
+    console.log('sometext', loggedInClimber)
     const { username } = loggedInClimber
 
     return (
