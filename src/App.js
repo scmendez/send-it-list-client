@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, withRouter, useHistory } from 'react-router-dom'
 
-import './App.css';
+
 import 'bootstrap/dist/css/bootstrap.css'
+import './App.css';
 
 import axios from 'axios'
 
@@ -32,7 +33,7 @@ const App = () => {
     if (!loggedInClimber) {
       axios.get(`${API_URL}/climber`, { withCredentials: true })
         .then((response) => {
-          console.log(response.data)
+          console.log('Check here', response.data)
           setLoggedInClimber(response.data)
         })
     }
@@ -93,7 +94,8 @@ const App = () => {
     //console.log('handle edit')
     axios.patch(`${API_URL}/editUsername/${climber._id}`, {username: username.value}, { withCredentials: true })
       .then((updatedClimber) => {
-          setLoggedInClimber(updatedClimber)  
+        console.log('HEREEEE', updatedClimber)
+          setLoggedInClimber(updatedClimber.data)  
           history.push('/home')      
       })
   }
@@ -177,6 +179,10 @@ const App = () => {
       <SILNavBar onLogout={handleLogOut} loggedInClimber={loggedInClimber}/>
 
       <Switch>
+
+        <Route exact path="/" render={ (routeProps) => {
+          return <ClimberHome {...routeProps} loggedInClimber={loggedInClimber} />
+        } }/>
 
         <Route path="/sign-up" render={ (routeProps) => {
           return <SignUp onSignUp={handleSignUp} {...routeProps} loggedInClimber={loggedInClimber} />

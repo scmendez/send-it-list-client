@@ -1,19 +1,31 @@
-.home-btn {
-    padding: 5px;
-    background-color: #525050;
+.btn {
+    padding: 7px;
+    background-color: #3dad59;
     color: #fff;
     border-radius: 5px;
     text-decoration: none;
+    /* box-shadow: 2px 2px 10px #888888; */
+    /* border: 1px solid; */
+    margin: 10px;
+    font-weight: 400;
 }
 
-.logout-btn {
-    padding: 5px;
-    background-color: red;
-    color: #fff;
+.btn:hover {
+    background-color: #fff;
+}
+
+.btn:active {
+    transform: translateY(4px);
+}
+
+.logout {
+    background-color: #f05454;
 }
 
 .nav-bar {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 100%;
+    background-color: transparent;
 }

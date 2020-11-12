@@ -1,26 +1,38 @@
-body {
-    background: #4DB6AC;
-}
-
 Button {
     padding: 20px;
     margin: 20px 10px;
     border-radius: 5px;
+    background-color: #ffa36c;   
+}
+
+h2 {
+    color: #fff;
 }
 
 .profile-photo {
     width: 200px;
     height: 200px;
+    margin: 20px;
+}
+
+.proj-btn {
+    background-color: #ffa36c;
+}
+
+.search-btn {
+    background-color: #fff;
 }
 
 .proj-links {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 800;
-    color: #EF6C00;
+    background-color: #ffa36c;
+    color: #fff;
 }
 
 .search-link {
     text-decoration: none;
     text-transform: uppercase;
+        color: #ffa36c;
 }

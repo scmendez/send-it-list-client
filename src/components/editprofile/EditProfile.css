@@ -1,0 +1,12 @@
+label {
+    color: #fff;
+}
+
+.edit-username-form {
+    margin: 20px;
+}
+
+.save-username-btn {
+    padding: 10px;
+    color: #fff;
+}

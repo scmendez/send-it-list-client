@@ -1,15 +1,19 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, usePrevious} from 'react'
 import axios from 'axios'
+import { Form } from 'react-bootstrap'
 
 import {API_URL} from '../../config'
+
+import './EditProfile.css'
 
 const EditProfile = (props) => {
 
     const [loggedInClimber, setLoggedInClimber] = useState(props.loggedInClimber)
+    console.log('props', props.loggedInClimber)
 
     useEffect(() => {
         let climberId = props.loggedInClimber ? (props.loggedInClimber._id) : null
-
+        console.log('climber', climberId)
         if (climberId) {
             axios.get(`${API_URL}/climberInfo/${climberId}`, { withCredentials: true })
                 .then((response) => {
@@ -18,6 +22,16 @@ const EditProfile = (props) => {
             })
         }
     }, [])
+
+    useEffect(() => {
+        const prevloggedInClimber = loggedInClimber
+        console.log('CDU', prevloggedInClimber)
+        if (props.loggedInClimber && !prevloggedInClimber ) {
+             setLoggedInClimber(props.loggedInClimber)
+        }
+ 
+    })
+
 
     const handleNameChange = (event) => {
         let cloneProfile = JSON.parse(JSON.stringify(loggedInClimber))
@@ -28,16 +42,16 @@ const EditProfile = (props) => {
     if (!loggedInClimber) {
         return null
     }
-    console.log('sometext', loggedInClimber)
+        console.log('SANDRA HERE', loggedInClimber)
     const { username } = loggedInClimber
 
     return (
         <React.Fragment>
-        <form onSubmit={ (event) => {props.onUsernameEdit(event, loggedInClimber)}}>
+        <Form onSubmit={ (event) => {props.onUsernameEdit(event, loggedInClimber)}} className="edit-username-form">
             <label>Username: </label>
             <input onChange={handleNameChange} type="text" value={username} name="username" ></input>
-            <button type="submit">Save username edit</button>
-        </form>
+            <button type="submit" className="save-username-btn">Save username edit</button>
+        </Form>
 
             <hr /> 
 

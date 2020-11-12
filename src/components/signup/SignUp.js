@@ -1,5 +1,8 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { Form, Button } from 'react-bootstrap'
+
+import './SignUp.css'
 
 const SignUp = (props) => {
 
@@ -8,23 +11,20 @@ const SignUp = (props) => {
     }
     
     return (
-        <form onSubmit={props.onSignUp}>
+        <Form onSubmit={props.onSignUp} className="form-styling sign-up-form">
             <div className="form-group">
-                <label>Username </label>
-                <input type="text" className="form-control" id="usernameInput" name="username" />
+                <Form.Control type="text" className="form-control" id="usernameInput" name="username" placeholder="Username"/>
             </div>
             <div className="form-group">
-                <label>Email </label>
-                <input type="email" className="form-control" id="emailInput" name="email" aria-describedby="emailHelp" />
+                <Form.Control type="email" className="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="Email"/>
             </div>
             <div className="form-group">
-                <label>Password </label>
-                <input type="password" className="form-control" id="passwordInput" name="password" />
+                <Form.Control type="password" className="form-control" id="passwordInput" name="password" placeholder="Password"/>
                 <br />
-                <small id="passwordRequirements" className="form-text text-muted">Password requirements: Minimum 8 characters, a number, a special character, an uppercase letter, and a lowercase letter.</small>                
+                <Form.Text id="passwordRequirements" className="form-text password-req">Password requirements: Minimum 8 characters, a number, a special character, an uppercase letter, and a lowercase letter.</Form.Text>                
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+            <Button type="submit" className="btn btn-primary">Submit</Button>
+        </Form>
     )
 }
 

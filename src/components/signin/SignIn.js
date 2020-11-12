@@ -1,17 +1,24 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
+import { Form, Button } from 'react-bootstrap'
+
+import './SignIn.css'
 
 const SignIn = (props) => {
+
+    if (props.loggedInClimber) {
+        return <Redirect to={'/home'} />
+    }
+    
     return (
-        <form onSubmit={props.onSignIn}>
+        <Form onSubmit={props.onSignIn} className="form-styling sign-in-form">
             <div className="form-group">
-                <label>Email</label>
-                <input onChange={props.onUnmount} type="email" className="form-control" id="emailInput" name="email" aria-describedby="emailHelp" />
+                <Form.Control onChange={props.onUnmount} type="email" className="form-control" id="emailInput" name="email" aria-describedby="emailHelp" placeholder="Email"/>
             </div>
             <div className="form-group">
-                <label>Password</label>
-                <input name="password" type="password" className="form-control" id="passwordInput" />
+                <Form.Control name="password" type="password" className="form-control" id="passwordInput" placeholder="Password"/>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>  
+            <Button type="submit" className="btn btn-primary">Submit</Button>  
 
             {
                 props.errorMessage ? (
@@ -19,7 +26,7 @@ const SignIn = (props) => {
                 ) : (null)
             }
 
-        </form>
+        </Form>
     )
 }
 

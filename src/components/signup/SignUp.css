@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.sign-up-form {
+    margin: 30px;
+    max-width: 500px;
+}
+
+.password-req {
+    color: #fff;
+}
