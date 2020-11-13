@@ -160,15 +160,21 @@ const App = () => {
       listType: listType.value
     }, { withCredentials: true })
       .then(() => {
-        let updatedRoute = myProjects.map((eachRoute) => {
-          if (eachRoute._id == route._id) {
-            eachRoute = route
-          }
-          return eachRoute
-        })
+        // let updatedRoute = myProjects.map((eachRoute) => {
+        //   if (eachRoute._id == route._id) {
+        //     return route
+        //   }
+        //   return eachRoute
+        // })
 
-        setMyProjects(updatedRoute)
-        history.push('/home')
+        axios.get(`${API_URL}/myProjects`, { withCredentials: true })
+          .then((response) => {
+            setMyProjects(response.data)
+            history.push('/home')
+        })
+        
+        //setMyProjects(updatedRoute)
+        
     })
   }
 
