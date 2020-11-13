@@ -48,6 +48,7 @@ const RouteDetails = (props) => {
             <Link to={`/edit/${_id}`}><button>Edit</button></Link>
             <button onClick={ () => { props.onDelete(_id) } }>Delete</button>
             <br />
+            <br />
             <a href={routeURL} target="_blank">Mtn Proj details</a>
         </div>
     )

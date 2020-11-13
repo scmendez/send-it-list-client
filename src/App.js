@@ -151,7 +151,7 @@ const App = () => {
     event.preventDefault();
     console.log('routeDbId', route._id)
 
-    const { personalNotes, dateAccomplished, listType } = event.target
+    const { personalNotes, listType } = event.target
     
     //console.log('handle edit')
     axios.patch(`${API_URL}/edit/${route._id}`, {

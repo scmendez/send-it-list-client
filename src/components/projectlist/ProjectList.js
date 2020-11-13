@@ -6,10 +6,12 @@ import './ProjectList.css'
 const ProjectList = (props) => {
 
     const { myProjects } = props
+    console.log(myProjects)
 
-    return myProjects.length 
-    ? (<h2>No projects yet!</h2>)
+    return  !myProjects.length ? (<h2>No routes yet!</h2>)
+    
     : (
+       
         <React.Fragment>
             {
                 myProjects.map((route) => {
