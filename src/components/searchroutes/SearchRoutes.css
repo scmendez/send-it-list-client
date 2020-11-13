@@ -1,0 +1,16 @@
+input {
+ padding: 10px;
+ border-radius: 3px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+button {
+    background-color: #fff;
+    padding: 10px 15px;
+}
+

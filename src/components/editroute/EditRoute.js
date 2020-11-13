@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import {API_URL} from '../../config'
+import './EditRoute.css'
 
 const EditRoute = (props) => {
 
@@ -27,25 +28,27 @@ const EditRoute = (props) => {
     const { routeName, routeType, routeRating, routePitches, routeLocation, personalNotes, dateAccomplished, listType } = route
 
     return (
-        <form onSubmit={ (event) => {props.onRouteEdit(event, route)}}>
-            Route Name: {routeName}
+        <form onSubmit={ (event) => {props.onRouteEdit(event, route)}} className="route-details">
+            <b>Route Name: </b>{routeName}
             <br />
-            Route Type: {routeType}
+            <b>Route Type: </b>{routeType}
             <br />
-            Route Rating: {routeRating}
+            <b>Route Rating: </b>{routeRating}
             <br />
+            <b>Type: </b>
             {
                 routeType == 'Boulder' ? null : (<p>Route Pitches: {routePitches}</p>)
             }
             <br />
+            <b>Location: </b>
             {routeLocation}
             <br />
-            <label>Personal Notes: </label>
+            <label>Personal Notes </label>
             <input name="personalNotes" onChange={personalNotesEdit} type="text" value={personalNotes}></input>
             <br />
-            <label>Date Accomplished </label>
+            {/* <label>Date Accomplished </label>
             <input name="dateAccomplished" type="text" value={dateAccomplished}></input>
-            <br />
+            <br /> */}
             <label>List </label>
             <select name="listType">
                 <option value={listType}>{listType}</option>

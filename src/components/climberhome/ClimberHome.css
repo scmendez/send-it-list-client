@@ -1,26 +1,18 @@
-Button {
-    padding: 20px;
-    margin: 20px 10px;
-    border-radius: 5px;
-    background-color: #ffa36c;   
-}
-
 h2 {
     color: #fff;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-photo {
     width: 200px;
     height: 200px;
     margin: 20px;
-}
-
-.proj-btn {
-    background-color: #ffa36c;
-}
-
-.search-btn {
-    background-color: #fff;
 }
 
 .proj-links {
@@ -31,8 +23,23 @@ h2 {
     color: #fff;
 }
 
+.proj-links:hover {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    background-color: #fff;
+    color: #ffa36c;
+}
+
 .search-link {
     text-decoration: none;
     text-transform: uppercase;
-        color: #ffa36c;
+    color: #ffa36c;
+}
+
+.search-link:hover {
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: #ffa36c;
+    color: #fff;
 }

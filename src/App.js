@@ -94,7 +94,6 @@ const App = () => {
     //console.log('handle edit')
     axios.patch(`${API_URL}/editUsername/${climber._id}`, {username: username.value}, { withCredentials: true })
       .then((updatedClimber) => {
-        console.log('HEREEEE', updatedClimber)
           setLoggedInClimber(updatedClimber.data)  
           history.push('/home')      
       })
@@ -125,7 +124,7 @@ const App = () => {
 
     axios.get(`${API_URL}/add-climbing-route/${routeId}`, { withCredentials: true })
       .then((response) => {
-        setMyProjects(...myProjects, response)
+        setMyProjects([...myProjects, response.data])
         history.push('/home')
       })
   }
@@ -157,7 +156,7 @@ const App = () => {
     //console.log('handle edit')
     axios.patch(`${API_URL}/edit/${route._id}`, {
       personalNotes: personalNotes.value,
-      dateAccomplished: dateAccomplished.value,
+      // dateAccomplished: dateAccomplished.value,
       listType: listType.value
     }, { withCredentials: true })
       .then(() => {

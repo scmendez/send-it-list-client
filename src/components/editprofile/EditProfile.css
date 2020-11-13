@@ -1,12 +1,16 @@
-label {
-    color: #fff;
+.edit-username-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
-.edit-username-form {
-    margin: 20px;
+.username-label {
+    color: #fff;
 }
 
 .save-username-btn {
     padding: 10px;
     color: #fff;
+    background-color: #000;
+    border-radius: 5px;
 }

@@ -48,9 +48,10 @@ const EditProfile = (props) => {
     return (
         <React.Fragment>
         <Form onSubmit={ (event) => {props.onUsernameEdit(event, loggedInClimber)}} className="edit-username-form">
-            <label>Username: </label>
+            <label className="username-label">Username: </label>
             <input onChange={handleNameChange} type="text" value={username} name="username" ></input>
-            <button type="submit" className="save-username-btn">Save username edit</button>
+            <br />
+            <button type="submit" className="save-username-btn">Save edit</button>
         </Form>
 
             <hr /> 

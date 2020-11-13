@@ -1,0 +1,19 @@
+a {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    text-decoration: none;
+}
+
+.route-details {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+}

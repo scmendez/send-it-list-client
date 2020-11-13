@@ -40,18 +40,18 @@ const ClimberHome = (props) => {
 
     return (
         <div>
-            <Container fluid>
+            <Container fluid className="link-container">
                 <Image className="profile-photo" src="/images/defaultProfilePhoto.png" alt="profile pic" roundedCircle />
                 {
                     loggedInClimber ? ( <h2>Hello, {loggedInClimber.username}!</h2> ) : null
                 }
-                <Button size="lg" className="proj-btn"><Link to="/current-projects" className="proj-links">Current Projects</Link></Button>
+                <Link to="/current-projects" className="proj-links">Current Projects</Link>
                 <br />
-                <Button size="lg" className="proj-btn"><Link to="/future-projects" className="proj-links">Potential Projects</Link></Button>
+                <Link to="/future-projects" className="proj-links">Potential Projects</Link>
                 <br />
-                <Button size="lg" className="proj-btn"><Link to="/sent-projects" className="proj-links">Sent Projects</Link></Button>
+                <Link to="/sent-projects" className="proj-links">Sent Projects</Link>
                 <br />
-                <Button size="lg" className="search-btn"><Link to="/search-routes" className="search-link">Search routes</Link></Button>
+                <Link to="/search-routes" className="search-link">Search routes</Link>
             </Container>    
         </div>
     )

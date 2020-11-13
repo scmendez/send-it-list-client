@@ -1,6 +1,33 @@
 .route-card {
-    border: 2px #fff solid;
-    padding: 10px;
-    margin: 10px;
+    margin: 20px;
     border-radius: 5px;
+}
+
+.card-img {
+    margin: 10px;
+}
+
+.card-info {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.more-info-link {
+    color: #ffa36c;
+    border: 1px #ffa36c solid;
+    padding: 10px 15px;
+    max-width: 50%;
+    border-radius: 5px;
+}
+
+.more-info-link:hover {
+    background-color: #ffa36c;
+    color: #fff;
+    border: 1px #ffa36c solid;
+    padding: 10px 15px;
+    max-width: 50%;
+    text-decoration: none;
+        border-radius: 5px;
 }
